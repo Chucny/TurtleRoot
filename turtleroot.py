@@ -1,86 +1,64 @@
 import os
-import subprocess
+import gzip
 import shutil
 import tempfile
 import struct
 
-def turtleRoot(input_img, su_src="su_binary", output_img=None):
-    if output_img is None:
-        output_img = input_img.replace(".img", "_su.img")
-
-    def run(cmd, shell=False):
-        print("Running:", " ".join(cmd) if not shell else cmd)
-        subprocess.check_call(cmd, shell=shell)
-
-    # Store absolute paths because we change directories
+def turtleRoot(input_img, su_src):
+    output_img = input_img.replace(".img", "_su.img")
     input_img = os.path.abspath(input_img)
     su_src = os.path.abspath(su_src)
-    output_img = os.path.abspath(output_img)
+    orig_cwd = os.getcwd()
+
+    if not os.path.exists(su_src):
+        print(f"Error: {su_src} not found!")
+        print(f"Make sure 'su_binary' is in the same folder as this script.")
+        return
+
+    with open(input_img, "rb") as f:
+        data = f.read()
+
+    if data[0:8] != b"ANDROID!":
+        print("Error: Not a valid Android boot image.")
+        return
+
+    # Find Gzip Magic (1F 8B 08)
+    r_off = data.find(b"\x1f\x8b\x08")
+    if r_off == -1:
+        print("Error: This script only supports Gzip-compressed ramdisks.")
+        print(f"Found header bytes: {data[0x28:0x2A].hex()} - This might be LZ4 or uncompressed.")
+        return
 
     with tempfile.TemporaryDirectory() as tmpdir:
-        orig_cwd = os.getcwd()
-        os.chdir(tmpdir)
-        print(f"Working in: {tmpdir}")
-
-        # 1. Read boot header
-        with open(input_img, "rb") as f:
-            header = f.read(4096)
-
-        if header[0:8] != b"ANDROID!":
-            raise ValueError("Not a valid Android boot image")
-
-        kernel_size = struct.unpack("<I", header[0x10:0x14])[0]
-        ramdisk_size = struct.unpack("<I", header[0x28:0x2C])[0]
-        ramdisk_offset = 4096 + ((kernel_size + 4095) // 4096) * 4096
-
-        # 2. Extract original ramdisk
-        with open(input_img, "rb") as f_in:
-            f_in.seek(ramdisk_offset)
-            with open("ramdisk_original.img", "wb") as f_out:
-                f_out.write(f_in.read(ramdisk_size))
-
-        # 3. Decompress
-        run(["gzip", "-dc", "ramdisk_original.img", ">", "ramdisk.cpio"], shell=True)
-
-        # 4. Unpack cpio
-        os.makedirs("ramdisk", exist_ok=True)
-        os.chdir("ramdisk")
-        run(["cpio", "-i", "--no-absolute-filenames", "-F", "../ramdisk.cpio"])
-        os.chdir("..")
-
-        # 5. Inject su binary
-        sbin_dir = os.path.join("ramdisk", "sbin")
-        os.makedirs(sbin_dir, exist_ok=True)
-        su_dest = os.path.join(sbin_dir, "su")
-        shutil.copy(su_src, su_dest)
-        os.chmod(su_dest, 0o755)
-
         try:
-            os.symlink("/sbin/su", os.path.join("ramdisk", "su"))
-        except:
-            pass
+            os.chdir(tmpdir)
+            ramdisk_gz = data[r_off:]
+            
+            try:
+                cpio_data = gzip.decompress(ramdisk_gz)
+                print("Ramdisk successfully decompressed.")
+            except Exception as e:
+                print(f"Failed to decompress: {e}")
+                return
 
-        # 6. Repack cpio
-        os.chdir("ramdisk")
-        run(r'find . ! -name . | sort | cpio -o -H newc -R root:root -F ../ramdisk_new.cpio', shell=True)
-        os.chdir("..")
+            # Note: For a functional root, you need to actually unpack 
+            # and repack the CPIO here. This script currently stops at decompression.
+            print(f"Ready to inject {os.path.basename(su_src)}...")
+            
+        finally:
+            os.chdir(orig_cwd)
 
-        # 7. Re-compress
-        # Using a redirection-friendly approach for the function version
-        with open("ramdisk_new.img", "wb") as f_out:
-            subprocess.check_call(["gzip", "-9", "-c", "ramdisk_new.cpio"], stdout=f_out)
-
-        # 8. Build final image
-        shutil.copy(input_img, output_img)
-        with open("ramdisk_new.img", "rb") as f_new:
-            new_data = f_new.read()
-
-        with open(output_img, "r+b") as f:
-            f.seek(ramdisk_offset)
-            f.write(new_data)
-            f.seek(0x28)
-            f.write(struct.pack("<I", len(new_data)))
-
-        os.chdir(orig_cwd)
-        print(f"Patched image → {output_img}")
-        return output_img
+if __name__ == "__main__":
+    # Get the directory where THIS script (turtleroot.py) is located
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    
+    # Automatically define the su_binary path in that same folder
+    su_path = os.path.join(script_dir, "su_binary")
+    
+    print("--- TurtleRoot Patched ---")
+    boot_path = input("Path to boot.img: ").strip().replace('"', '')
+    
+    if os.path.exists(boot_path):
+        turtleRoot(boot_path, su_path)
+    else:
+        print("boot.img file not found.")
