@@ -4,7 +4,7 @@ import shutil
 import tempfile
 import struct
 
-def turtleRoot(input_img, su_src, output_img=None):
+def turtleRoot(input_img, su_src="su_binary", output_img=None):
     if output_img is None:
         output_img = input_img.replace(".img", "_su.img")
 
