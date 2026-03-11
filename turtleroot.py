@@ -3,7 +3,7 @@ import gzip
 import shutil
 import tempfile
 import struct
-
+print("TurtleRoot - Made by Chucny")
 def turtleRoot(input_img, su_src):
     output_img = input_img.replace(".img", "_su.img")
     input_img = os.path.abspath(input_img)
