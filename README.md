@@ -3,24 +3,11 @@
 <p><strong>TurtleRoot</strong> is a lightweight Python tool for patching Android boot images
 (<code>boot.img</code> or <code>init_boot.img</code>) and injecting a <code>su</code> binary to enable root access.</p>
 
-<p>This project is mainly intended for <strong>older Android devices</strong> and
-educational / research purposes.</p>
+<p>This project is intended for rooting android devices</p>
 
 <hr>
 
-<h2>👨‍💻 Developer</h2>
 
-<p><strong>TurtleRoot was created and is maintained by:</strong></p>
-
-<h3>⭐ Chucny</h3>
-
-<ul>
-<li>Creator of TurtleRoot</li>
-<li>Lead developer</li>
-<li>Project maintainer</li>
-</ul>
-
-<p>All core logic and implementation were written by <strong>Chucny (2026)</strong>.</p>
 
 
 
@@ -95,6 +82,7 @@ educational / research purposes.</p>
 <p>Example:</p>
 
 <pre><code>python turtleroot.py
+Enter file path for your boot.img/init_boot.img: 
 </code></pre>
 
 <p>The tool will:</p>
@@ -172,11 +160,11 @@ su
 </tr>
 <tr>
 <td>Android 10</td>
-<td>Partial</td>
+<td>Supported</td>
 </tr>
 <tr>
 <td>Android 11+</td>
-<td>Not guaranteed but possible</td>
+<td>Supported, uses WandersonKalil su 30.5 (should work with most modern android devices)</td>
 </tr>
 </table>
 
