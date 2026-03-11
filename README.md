@@ -3,8 +3,8 @@
 <p><strong>TurtleRoot</strong> is a lightweight Python tool for patching Android boot images
 (<code>boot.img</code> or <code>init_boot.img</code>) and injecting a <code>su</code> binary to enable root access.</p>
 
-<p>This project is intended for rooting android devices</p>
-
+<p>This project is intended for rooting android devices</p><br>
+<strong>IMPORTANT: ONLY GIVES ROOT, EXPECTS A MANAGER APP, FOR EXAMPLE MAGISK TO WORK</strong>
 <hr>
 
 
@@ -130,7 +130,7 @@ Enter file path for your boot.img/init_boot.img:
 <hr>
 
 <h2>🔎 Checking Root</h2>
-
+Install any root manager app, reboot and:<br>
 <pre><code>adb shell
 su
 </code></pre>
