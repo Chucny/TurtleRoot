@@ -62,3 +62,4 @@ if __name__ == "__main__":
         turtleRoot(boot_path, su_path)
     else:
         print("boot.img file not found.")
+input()
