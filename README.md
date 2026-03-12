@@ -275,6 +275,8 @@ su
 <tr>
 <td>Android 11+</td>
 <td>Supported, uses WandersonKalil su 30.5 (should work with most modern android devices)</td>
+<td>Android 13+</td>
+<td>Supports A13+, init_boot supported, since the ramdisk is only the thing needed for writing the su binaries./td>
 </tr>
 </table>
 
