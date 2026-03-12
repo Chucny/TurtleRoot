@@ -8,7 +8,7 @@ import gzip
 import platform
 import subprocess
 
-print("TurtleRoot - Made by Chucny v1.4")
+print("TurtleRoot - Made by Chucny v1.4.1")
 
 def prRed(s): print("\033[91m{}\033[00m".format(s))
 def prGreen(s): print("\033[92m{}\033[00m".format(s))
@@ -17,25 +17,23 @@ def prCyan(s): print("\033[96m{}\033[00m".format(s))
 
 # === Turtle ASCII ===
 prGreen("""
-                         ========
-                       ==+**++**+==
-                       ==+**++**+==
-                       ============
-                       ============
-                        ==========
-                       ============
-             ================================
-           ============+#%%#+==+##++%%+========
-            =========+##*+++===+%%++%%+=======
-              ========+*#%%#+==+%@%%@@#=====
-             ==========++***#*+++*****+======
-           ============+*###**+================
-           ============+*##*+==================
-             ================================
-                       ============
-                         ========
-                           ====
-                           ====
+                                                 
+                   ░░░░░░                        
+                   ░░▒░▒░░                       
+                   ░░░░░░░                       
+                    ░░░░                         
+                   ░░░░░░░                       
+           ░░░░  ░░░░░░░░░  ░░░░                
+         ░░░░░░░░░▓██▒░░▓█▒▓█▒░░░░░              
+           ░░░░░▒▓▒▒▒░░░▓█▒▓█▒░░░                
+               ░░░▒▓▓▓▒░▒▓▓▓▓░                   
+           ░░░░░░░▒▒▒▓▓░░░░░░░░░░░               
+          ░░░░░░░░▒▓▓▒░░░░░░ ░░░░░               
+                  ░░░░░░░░                       
+                    ░░░░░                        
+                     ░░                          
+                      ░                          
+
 """)
 
 is_windows = platform.system() == "Windows"
@@ -261,7 +259,7 @@ Patched image created:
 
 if __name__ == "__main__":
 
-    prYellow("TurtleRoot 1.4\n")
+    prYellow("TurtleRoot 1.4.1\n")
 
     boot_path = input("Path to init_boot.img or boot.img: ").replace('"','').strip()
     if not os.path.exists(boot_path):
