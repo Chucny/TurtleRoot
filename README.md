@@ -291,7 +291,7 @@ su
 <li>boot image signature verification</li>
 </ul>
 
-<p>These protections may prevent TurtleRoot from working.</p>
+<p>These protections can prevent TurtleRoot from working, but they usually don't exist once the bootloader has been unlocked.</p>
 
 <hr>
 
