@@ -8,7 +8,7 @@ import sys
 import gzip
 import platform
 
-print("TurtleRoot - Made by Chucny v1.2")
+print("TurtleRoot - Made by Chucny v1.3")
 
 def prRed(s): print("\033[91m{}\033[00m".format(s))
 def prGreen(s): print("\033[92m{}\033[00m".format(s))
@@ -59,6 +59,13 @@ def get_tool_path(tool):
 def run(cmd):
     print("→", " ".join(cmd) if isinstance(cmd, list) else cmd)
     subprocess.check_call(cmd)
+
+def suinput():
+    u = input("Press enter to continue, or enter filename for a custom su binary in the same folder as TurtleRoot.py ")
+    if u == "":
+        return "su_binary"
+    else:
+        return u
 
 # ================= MAIN =================
 
@@ -238,10 +245,10 @@ Patched image created:
 
 if __name__ == "__main__":
 
-    prYellow("TurtleRoot 1.2\n")
+    prYellow("TurtleRoot 1.3\n")
 
     script_dir = os.path.dirname(os.path.abspath(__file__))
-    su_path = os.path.join(script_dir, "su_binary")
+    su_path = os.path.join(script_dir, suinput())
 
     boot_path = input("Path to init_boot.img or boot.img: ").strip().replace('"', '')
 
