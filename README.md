@@ -4,7 +4,8 @@
 (<code>boot.img</code> or <code>init_boot.img</code>) and injecting a <code>su</code> binary to enable root access.</p>
 
 <p>This project is intended for rooting android devices</p><br>
-<strong>IMPORTANT: ONLY GIVES ROOT, EXPECTS A MANAGER APP, FOR EXAMPLE MAGISK TO WORK</strong><br><strong>The application also supports a custom su binary i nthe same folder as your TurtleRoot.py! If you want a custom binary, enter the filename. Otherwise, just press enter.</strong>
+<strong>IMPORTANT: ONLY GIVES ROOT, EXPECTS A MANAGER APP, FOR EXAMPLE MAGISK TO WORK</strong><br><strong>The application also supports a custom <code>su</code>
+ binary in the same folder as your TurtleRoot.py! If you want a custom binary, enter the filename. Otherwise, just press enter.</strong>
 <hr>
 
 
