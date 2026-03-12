@@ -1,5 +1,5 @@
 <h1>🐢 TurtleRoot  </h1>
-<strong><p>v1.3</p></strong>
+<strong><p>v1.4</p></strong>
 <p><strong>TurtleRoot</strong> is a lightweight Python tool for patching Android boot images
 (<code>boot.img</code> or <code>init_boot.img</code>) and injecting a <code>su</code> binary to enable root access.</p>
 
