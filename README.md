@@ -29,18 +29,128 @@
 <p>You are responsible for your device.</p>
 
 <hr>
+<h2>⚙️ Installing Required Tools</h2>
 
-<h2>📦 Features</h2>
+<p>
+TurtleRoot requires a few command line utilities to unpack Android ramdisks:
+</p>
 
 <ul>
-<li>Injects <code>su</code> binary into Android boot images</li>
-<li>Supports <code>boot.img</code> and <code>init_boot.img</code></li>
-<li>Simple Python CLI tool</li>
-<li>Lightweight and easy to use</li>
-<li>Designed for experimentation and Android research</li>
+<li><b>cpio</b> – used to extract and rebuild the ramdisk</li>
+<li><b>lz4</b> – used for some compressed ramdisks</li>
 </ul>
 
+<p>
+These tools are automatically available on Linux, but Windows users must install them manually.
+</p>
+
 <hr>
+
+<h2>🪟 Windows Installation</h2>
+
+<p>The easiest method is installing <b>Git for Windows</b>, which includes all required Unix tools.</p>
+
+<h3>Step 1 – Download Git for Windows</h3>
+
+<p>
+Download from the official website:
+</p>
+
+<pre><code>https://git-scm.com/download/win</code></pre>
+
+<h3>Step 2 – Install</h3>
+
+<ol>
+<li>Run the installer</li>
+<li>Use default settings</li>
+<li>Finish installation</li>
+</ol>
+
+<p>
+Git installs useful tools including:
+</p>
+
+<pre><code>
+cpio
+gzip
+lz4
+tar
+find
+</code></pre>
+
+<h3>Step 3 – Verify Installation</h3>
+
+Open <b>Command Prompt</b> or <b>PowerShell</b> and run:
+</p>
+
+<pre><code>cpio --version</code></pre>
+
+<p>If installed correctly, you should see something like:</p>
+
+<pre><code>cpio (GNU cpio) 2.13</code></pre>
+
+<hr>
+
+<h3>Alternative (Portable)</h3>
+
+You can also place the tools directly in the TurtleRoot folder:
+
+<pre><code>
+TurtleRoot/
+ ├── turtleroot.py
+ ├── su_binary
+ ├── cpio.exe
+ ├── lz4.exe
+</code></pre>
+
+This makes TurtleRoot portable and avoids installing system packages.
+
+<hr>
+
+<h2>🐧 Linux Installation</h2>
+
+Most Linux distributions include these tools in their package manager.
+
+<h3>Debian / Ubuntu / Kali</h3>
+
+<pre><code>sudo apt update
+sudo apt install cpio lz4 -y</code></pre>
+
+<h3>Arch Linux</h3>
+
+<pre><code>sudo pacman -S cpio lz4</code></pre>
+
+<h3>Fedora</h3>
+
+<pre><code>sudo dnf install cpio lz4</code></pre>
+
+<h3>Verify Installation</h3>
+
+Run:
+
+<pre><code>cpio --version
+lz4 --version</code></pre>
+
+<hr>
+
+<h2>🚀 After Installing</h2>
+
+Once the tools are installed, run TurtleRoot:
+
+<pre><code>python turtleroot.py</code></pre>
+
+Example:
+
+<pre><code>
+Path to init_boot.img or boot.img: boot.img
+Detected ramdisk...
+Injected su...
+SUCCESS!
+</code></pre>
+
+<hr>
+
+
 
 <h2>🧰 Requirements</h2>
 
