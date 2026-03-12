@@ -310,7 +310,7 @@ su
 
 <h2>🐢 Why TurtleRoot?</h2>
 
-<p><strong>RurtleRoot - The magic turtle behind android</strong></p>
+<p><strong>TurtleRoot - The magic turtle behind android</strong></p>
 
 
 
