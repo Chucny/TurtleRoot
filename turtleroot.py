@@ -8,7 +8,7 @@ import gzip
 import platform
 import subprocess
 
-print("TurtleRoot - Made by Chucny v1.4.1")
+print("TurtleRoot - Made by Chucny v1.4.2")
 
 def prRed(s): print("\033[91m{}\033[00m".format(s))
 def prGreen(s): print("\033[92m{}\033[00m".format(s))
@@ -33,7 +33,6 @@ prGreen("""
                     ░░░░░                        
                      ░░                          
                       ░                          
-
 """)
 
 is_windows = platform.system() == "Windows"
@@ -257,9 +256,9 @@ Patched image created:
 
 # ================= CLI =================
 
-if __name__ == "__main__":
+if True:
 
-    prYellow("TurtleRoot 1.4.1\n")
+    prYellow("TurtleRoot 1.4.2\n")
 
     boot_path = input("Path to init_boot.img or boot.img: ").replace('"','').strip()
     if not os.path.exists(boot_path):
